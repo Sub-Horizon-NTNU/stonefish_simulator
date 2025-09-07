@@ -209,7 +209,7 @@
         <sensor name="Cam" rate="30.0" type="camera">
             <link name="Base"/>
             <specs resolution_x="960" resolution_y="540" horizontal_fov="80.0"/>
-            <origin xyz="0.0 0.2 0.05" rpy="-1.57 0.0 0.0"/>
+	    <origin xyz="0.0 -1.0 0.0" rpy="-1.5708 0.0 0.0"/>
             <ros_publisher topic="/gbr/cam"/>
         </sensor>
 

@@ -6,7 +6,7 @@ TARGET_DT = 1.0 / TARGET_HZ
 import rclpy
 import time
 from rclpy.node import Node
-from packages.gbr_direct_interface import GBRDirectInterface
+from gbr_control.packages.gbr_direct_interface import GBRDirectInterface
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import deque

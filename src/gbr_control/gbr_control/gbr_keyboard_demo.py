@@ -5,7 +5,7 @@ import time
 from rclpy.node import Node
 from pynput import keyboard
 import threading
-from packages.gbr_direct_interface import GBRDirectInterface
+from gbr_control.packages.gbr_direct_interface import GBRDirectInterface
 
 # Control state
 active_keys = set()
