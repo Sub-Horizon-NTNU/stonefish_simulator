@@ -14,5 +14,5 @@
 
   <include file="$(find stonefish_sim)/metadata/materials.scn"/>
   <include file="$(find stonefish_sim)/metadata/looks.scn"/>
-  <include file="$(find stonefish_sim)/drones/gbr.scn"/>
+  <include file="$(find stonefish_sim)/drones/skandi_iceman.scn"/>
 </scenario>
