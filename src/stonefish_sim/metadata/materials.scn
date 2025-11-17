@@ -3,9 +3,11 @@
         <materials>
 
             <material name="Neutral" density="1000.0" restitution="0.5"/>
+            <material name="BoatTestMaterial" density=".0" restitution="0.5"/>
 
             <friction_table>
                 <friction material1="Neutral" static="0.9" dynamic="0.9"/>
+                <friction material1="BoatTestMaterial" static="0.9" dynamic="0.9"/>
             </friction_table>
 
         </materials>
