@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <scenario>
     <robot name="skandi_iceman" fixed="false" self_collisions="false">
-        <base_link name="Base" type="compound" physics="submerged">
+        <base_link name="Base" type="compound" physics="floating">
 
-            <external_part name="main_body" type="model" physics="submerged">
+            <external_part name="main_body" type="model" physics="floating">
                 <physical>
                     <mesh filename="vard/skandi_iceman.obj" scale="1"/>
                     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
