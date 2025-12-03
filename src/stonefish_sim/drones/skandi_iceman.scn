@@ -1,32 +1,117 @@
 <?xml version="1.0"?>
 <scenario>
-    <robot name="skandi_iceman" fixed="false" self_collisions="false">
-        <base_link name="Base" type="compound" physics="floating">
 
-            <external_part name="main_body" type="model" physics="floating">
-                <physical>
-                    <mesh filename="vard/skandi_iceman.obj" scale="1"/>
-                    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-                </physical>
-                <visual>
-                    <mesh filename="vard/skandi_iceman.obj" scale="1"/>
-                    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-                </visual>
-                <material name="BoatTestMaterial"/>
-                <look name="Red"/>
-                <mass value="4000000.00"/>
-                <cg xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-                <compound_transform xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            </external_part>
-            
-        </base_link>
+  <robot name="skandi_iceman" fixed="false" self_collisions="false">
 
-        <sensor name="odom" type="odometry" rate="1000.0">
-            <link name="Base"/>
-            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-            <ros_publisher topic="/vard/odom"/>
-        </sensor>
+    <!-- ========================= -->
+    <!-- BASE LINK (SHIP HULL)     -->
+    <!-- ========================= -->
+    <base_link name="Base" type="compound" physics="floating">
 
-        <world_transform xyz="0.0 0.0 0.0" rpy="3.14159 0.0 0.0"/>
-    </robot>
+      <external_part name="main_body" type="model" physics="floating">
+        <physical>
+          <mesh filename="vard/skandi_iceman.obj" scale="1"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+        </physical>
+
+        <visual>
+          <mesh filename="vard/skandi_iceman.obj" scale="1"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+
+        <material name="BoatTestMaterial"/>
+        <look name="Red"/>
+
+        <mass value="4000000.0"/>
+        <cg xyz="0 0 0" rpy="0 0 0"/>
+
+        <compound_transform xyz="0 0 0" rpy="0 0 0"/>
+      </external_part>
+
+    </base_link>
+
+    <!-- ========================= -->
+    <!-- CRANE LINK                -->
+    <!-- ========================= -->
+    <link name="Crane" type="compound" physics="floating">
+
+      <external_part name="crane_body" type="model" physics="floating">
+
+        <physical>
+          <mesh filename="vard/crane.obj" scale="1"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+        </physical>
+
+        <visual>
+          <mesh filename="vard/crane.obj" scale="1"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+
+        <material name="BoatTestMaterial"/>
+        <look name="Red"/>
+
+        <mass value="20000000000.0"/>
+        <cg xyz="0 0 0" rpy="0 0 0"/>
+
+        <!-- Local pose of crane geometry -->
+        <compound_transform xyz="0 0 0" rpy="0 0 0"/>
+
+      </external_part>
+
+    </link>
+
+    <!-- ========================= -->
+    <!-- CRANE SWIVEL JOINT        -->
+    <!-- ========================= -->
+    <joint name="CraneYaw" type="revolute">
+      <parent name="Base"/>
+      <child  name="Crane"/>
+
+      <!-- CHANGE THIS to the real crane base position -->
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+
+      <!-- Vertical yaw axis -->
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- SERVO ACTUATOR            -->
+    <!-- ========================= -->
+    <actuator name="CraneServo" type="servo">
+
+      <controller
+        position_gain="5.0"
+        velocity_gain="5.0"
+        max_torque="10000.0"
+        max_velocity="5"/>
+
+      <joint name="CraneYaw"/>
+
+      <!-- Initial crane angle (rad) -->
+      <initial position="0.0"/>
+
+    </actuator>
+
+    <!-- ========================= -->
+    <!-- ODOMETRY SENSOR           -->
+    <!-- ========================= -->
+    <sensor name="odom" type="odometry" rate="1000.0">
+      <link name="Base"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <ros_publisher topic="/vard/odom"/>
+    </sensor>
+
+    <!-- ========================= -->
+    <!-- ROS SERVO INTERFACE       -->
+    <!-- ========================= -->
+    <ros_publisher  servos="/skandi_iceman/joint_states"/>
+    <ros_subscriber servos="/skandi_iceman/joint_setpoints"/>
+
+    <!-- ========================= -->
+    <!-- WORLD TRANSFORM           -->
+    <!-- ========================= -->
+    <world_transform xyz="0 0 0" rpy="3.14159 0 0"/>
+
+  </robot>
+
 </scenario>
