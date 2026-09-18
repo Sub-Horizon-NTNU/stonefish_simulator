@@ -127,3 +127,12 @@ The following scenarios are available:
 - `window_res_x`: Window width in pixels (default: 1920)
 - `window_res_y`: Window height in pixels (default: 1080)
 - `rendering_quality`: Graphics quality - low/medium/high (default: high)
+
+
+## Repository purpose and scope
+
+This ROS 2 Jazzy workspace simulates the GBR underwater ROV using Stonefish. It contains underwater scenarios, vehicle models, keyboard-control examples and DYNSYS exercises.
+
+Start with [scenarios](src/stonefish_sim/scenarios/), [vehicle definitions](src/stonefish_sim/drones/) and [direct-control examples](src/gbr/direct_control/). Stonefish and its ROS 2 integration are Git submodules. For Selene surface-vessel/Autodrone simulation, see the separate [usv_simulator](https://github.com/Sub-Horizon-NTNU/usv_simulator).
+
+Known documentation discrepancies are recorded in [docs/INCONSISTENCIES.md](docs/INCONSISTENCIES.md).
